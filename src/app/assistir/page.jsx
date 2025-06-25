@@ -1,25 +1,40 @@
 'use client'
 
-import AnimeBanner from "@/components/AnimeBanner";
-import AnimePlayer from "@/components/AnimePlayer";
-import Temporadas from "@/components/Temporadas";
-import Comentarios from "@/components/Comentarios";
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
+import Navbar from "@/components/navbar/page";
+import AnimeBanner from "@/components/animebanner/page";
+import AnimePlayer from "@/components/animeplayer/page";
+import Comentarios from "@/components/comentarios/page";
+import Temporadas from "@/components/temporada/page";
+import Footer from "@/components/rodape/page";
 
-export default function AnimePage() {
-  const [temporadaSelecionada, setTemporadaSelecionada] = useState(1);
+export default function AssistirPage() {
+  const [temporada, setTemporada] = useState(1);
+  const [anime, setAnime] = useState(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("animeSelecionado");
+    if (stored) setAnime(JSON.parse(stored));
+  }, []);
 
   return (
-    <div className="bg-slate-800 text-white min-h-screen px-4 py-6">
-      <AnimeBanner />
-      <div className="max-w-6xl mx-auto mt-6 flex flex-col lg:flex-row gap-6">
-        <AnimePlayer />
-        <Temporadas
-          temporada={temporadaSelecionada}
-          setTemporada={setTemporadaSelecionada}
-        />
+    <div className="bg-slate-800 text-white min-h-screen">
+      <div className="fixed w-full z-50 bg-[#B8C3D7]/35 backdrop-blur-lg">
+      <Navbar />
       </div>
+
+      < AnimeBanner />
+
+      <AnimePlayer />
+      <Temporadas />
+
       <Comentarios />
-    </div>
+
+      <Footer />
+
+      </div>
+      
+
+
   );
 }

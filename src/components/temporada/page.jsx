@@ -2,17 +2,22 @@ import React from "react";
 
 export default function Temporadas({ temporada, setTemporada }) {
   return (
-    <div className="w-full lg:w-40">
-      {[1, 2].map((num) => (
-        <button
-          key={num}
-          onClick={() => setTemporada(num)}
-          className={`w-full py-3 px-4 mb-2 rounded text-left font-semibold 
-            ${temporada === num ? 'bg-slate-700 text-white' : 'bg-slate-600 text-slate-300 hover:bg-slate-500'}`}
-        >
-          {num} Temporada
-        </button>
-      ))}
+    <div className="w-full lg:w-40 mb-6">
+      <label htmlFor="temporada" className="block mb-2 font-semibold text-white">
+        Selecionar Temporada
+      </label>
+      <select
+        id="temporada"
+        value={temporada}
+        onChange={(e) => setTemporada(Number(e.target.value))}
+        className="w-full bg-slate-700 text-white p-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-slate-500"
+      >
+        {[1, 2].map((num) => (
+          <option key={num} value={num}>
+            {num}ª Temporada
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
